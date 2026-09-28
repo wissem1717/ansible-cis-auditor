@@ -1,0 +1,10 @@
+- import_playbook: cis.yml
+
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Deploy - Install Apache (fake)
+      debug:
+        msg: "Apache installed"
+
+- import_playbook: override_good.yml

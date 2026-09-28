@@ -1,0 +1,7 @@
+# playbooks/cis.yml
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: CIS - hardening (simulé)
+      debug:
+        msg: "CIS applied (black box)"

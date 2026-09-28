@@ -1,0 +1,26 @@
+rules:
+  - id: CIS-SSH-01
+    title: "Interdire root en SSH"
+    match:
+      module: lineinfile
+      path: "/etc/ssh/sshd_config"
+      key: "PermitRootLogin"
+    expected: "no"
+    severity: HIGH
+
+  - id: CIS-SSH-02
+    title: "Désactiver PasswordAuthentication"
+    match:
+      module: lineinfile
+      path: "/etc/ssh/sshd_config"
+      key: "PasswordAuthentication"
+    expected: "no"
+    severity: HIGH
+
+  - id: CIS-FS-01
+    title: "/tmp doit être monté avec noexec"
+    match:
+      module: mount
+      path: "/tmp"
+    expected_opts_must_not_include: ["exec"]
+    severity: MEDIUM

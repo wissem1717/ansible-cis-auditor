@@ -1,0 +1,15 @@
+# playbooks/deploy.yml
+- import_playbook: cis.yml
+
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Deploy - Install Apache (fake)
+      debug:
+        msg: "Apache installed"
+
+    - name: Deploy - Install MariaDB (fake)
+      debug:
+        msg: "MariaDB installed"
+
+- import_playbook: override_bad.yml

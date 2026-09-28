@@ -1,0 +1,23 @@
+# playbooks/override_bad.yml
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: BAD - Enable root SSH (contradiction CIS)
+      lineinfile:
+        path: /etc/ssh/sshd_config 
+        regexp: '^PermitRootLogin' #Va chercher une ligne qui commence par PermitRootLogin.
+        line: 'PermitRootLogin yes'
+
+    - name: BAD - Allow password authentication (contradiction CIS)
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication'
+        line: 'PasswordAuthentication yes'
+
+    - name: BAD - Mount /tmp with exec (contradiction CIS)
+      mount:
+        path: /tmp
+        src: tmpfs
+        fstype: tmpfs
+        opts: "rw,exec"
+        state: mounted
