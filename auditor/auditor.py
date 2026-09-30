@@ -109,8 +109,17 @@ def main():
     rules = load_policy(policy_path)
     violations = detect_violations(tasks, rules)
 
+    def rel(p):
+        try:
+            return str(Path(p).resolve().relative_to(BASE_DIR))
+        except ValueError:
+            return str(p)
+
+    for v in violations:
+        v["file"] = rel(v["file"])
+
     report = {
-        "playbook": str(playbook),
+        "playbook": rel(playbook),
         "violations_count": len(violations),
         "violations": violations
     }
@@ -125,11 +134,11 @@ def main():
             print(f"- {v['rule_id']} ({v['severity']}): {v['title']}")
             print(f"  Task: {v['found_in_task']}")
             print(f"  File: {v['file']}")
-        print(f"\nReport JSON: {out_path}")
+        print(f"\nReport JSON: {rel(out_path)}")
         sys.exit(1)
 
     print("Aucun problème détecté.")
-    print(f"Report JSON: {out_path}")
+    print(f"Report JSON: {rel(out_path)}")
     sys.exit(0)
 
 if __name__ == "__main__":

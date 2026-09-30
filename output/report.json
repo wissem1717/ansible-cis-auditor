@@ -1,5 +1,5 @@
 {
-  "playbook": "/home/claude/ansible-cis-auditor/playbooks/deploy.yml",
+  "playbook": "playbooks/deploy.yml",
   "violations_count": 3,
   "violations": [
     {
@@ -7,7 +7,7 @@
       "title": "Interdire root en SSH",
       "severity": "HIGH",
       "found_in_task": "BAD - Enable root SSH (contradiction CIS)",
-      "file": "/home/claude/ansible-cis-auditor/playbooks/override_bad.yml",
+      "file": "playbooks/override_bad.yml",
       "evidence": {
         "path": "/etc/ssh/sshd_config",
         "line": "PermitRootLogin yes",
@@ -19,7 +19,7 @@
       "title": "Désactiver PasswordAuthentication",
       "severity": "HIGH",
       "found_in_task": "BAD - Allow password authentication (contradiction CIS)",
-      "file": "/home/claude/ansible-cis-auditor/playbooks/override_bad.yml",
+      "file": "playbooks/override_bad.yml",
       "evidence": {
         "path": "/etc/ssh/sshd_config",
         "line": "PasswordAuthentication yes",
@@ -31,7 +31,7 @@
       "title": "/tmp doit être monté avec noexec",
       "severity": "MEDIUM",
       "found_in_task": "BAD - Mount /tmp with exec (contradiction CIS)",
-      "file": "/home/claude/ansible-cis-auditor/playbooks/override_bad.yml",
+      "file": "playbooks/override_bad.yml",
       "evidence": {
         "path": "/tmp",
         "opts": "rw,exec",
